@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".personalDataFragment">
 
+    <include
+        android:id="@+id/personalDataLayout"
+        layout="@layout/personal_data_layout"/>
 
+    <include
+        android:id="@+id/loadingLayout"
+        layout="@layout/loading_layout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

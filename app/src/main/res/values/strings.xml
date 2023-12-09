@@ -38,4 +38,27 @@
     <string name="next_register">Selanjutnya</string>
     <string name="title_personal_data">Data Pribadi</string>
     <string name="username">Nama</string>
+    <string name="username_hint">Masukkan Namamu</string>
+    <string name="chooseJob">Pilih Pekerjaan</string>
+    <string name="chooseJob_hint">Pilih Pekerjaan Anda</string>
+    <string name="cityDomicile">Kota Domisili</string>
+    <string name="cityDomicile_hint">Kota Dimisili Anda</string>
+    <string name="birth">Tanggal Lahir</string>
+    <string name="birth_hint">DD/MM/YYYY</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="gender_hint">Laki-laki / Perempuan</string>
+    <string name="invalid_date_format">Invalid date format (dd/mm/yyyy)</string>
+    <string name="welcome">Selamat bergabung!</string>
+    <string name="descWelcome">Ayo jelajahi fitur-fitur yang ada di Kopra Lapak\n sekarang Juga!</string>
+    <string name="welcomeBtn">Yuk Jelajahi Kopra Lapak</string>
+    <string name="bsTitleTv">Pilih Pekerjaan</string>
+    <string name="option1_job">Penjual Kopra</string>
+    <string name="option2_job">Pembeli Kopra</string>
+    <string name="bsCityTitleTv">Kota Domisisli</string>
+    <string name="searchbar_hint">Cari Kota Anda</string>
+    <string name="title_kopra">Jual Kopra</string>
+    <string name="title_forum">Forum</string>
+    <string name="title_home">Home</string>
+    <string name="title_mentor">Mentor</string>
+    <string name="title_profile">Profile</string>
 </resources>
