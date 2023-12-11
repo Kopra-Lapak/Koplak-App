@@ -61,4 +61,17 @@
     <string name="title_home">Home</string>
     <string name="title_mentor">Mentor</string>
     <string name="title_profile">Profile</string>
+    <string name="content_description_media">image</string>
+    <string name="date_text">08 November 2023</string>
+    <string name="title">Melihat Potensi Industri Kelapa dan Kopra yang Luput dari Perhatian Pemerintah…</string>
+    <string name="floating_button">Buat Feeds</string>
+    <string name="news">Berita</string>
+    <string name="news_all">Lihat Semua</string>
+    <string name="title_activity_main">Main Activity</string>
+    <string name="feed">Feeds</string>
+    <string name="harga_text">Harga : Rp %d /Kg</string>
+    <string name="harga_example">1.300</string>
+    <string name="massa">/Kg</string>
+    <string name="kota">Kota %s</string>
+    <string name="contact">Contact : %d</string>
 </resources>

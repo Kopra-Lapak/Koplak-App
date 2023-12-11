@@ -1,4 +1,4 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.ui.onboarding
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

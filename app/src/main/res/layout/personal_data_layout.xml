@@ -77,7 +77,7 @@
         android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:passwordToggleEnabled="true"
+        app:endIconMode="custom"
         app:layout_constraintTop_toBottomOf="@+id/chooseJobTextView"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:errorTextColor="@color/brown">
@@ -87,7 +87,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/chooseJob_hint"/>
+            android:hint="@string/chooseJob_hint"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:longClickable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -109,7 +113,7 @@
         android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:passwordToggleEnabled="true"
+        app:endIconMode="custom"
         app:layout_constraintTop_toBottomOf="@+id/cityDomicileTextView"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:errorTextColor="@color/brown">
@@ -119,7 +123,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/cityDomicile_hint"/>
+            android:hint="@string/cityDomicile_hint"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:longClickable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -151,8 +159,11 @@
             android:layout_height="50dp"
             android:ems="10"
             android:paddingStart="15dp"
-            android:inputType="text"
-            android:hint="@string/birth_hint" />
+            android:hint="@string/birth_hint"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:longClickable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -175,7 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genderTextView"
-        app:passwordToggleEnabled="true"
+        app:endIconMode="custom"
         app:endIconDrawable="@drawable/baseline_keyboard_arrow_down_24"
         app:errorTextColor="@color/brown">
 
@@ -184,7 +195,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/gender_hint"/>
+            android:hint="@string/gender_hint"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            android:longClickable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -1,9 +1,11 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.ui.opening
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.koplakmungkin.databinding.ActivityOpeningBinding
+import com.example.koplakmungkin.ui.login.LoginActivity
+import com.example.koplakmungkin.ui.register.RegisterActivity
 
 class OpeningActivity : AppCompatActivity() {
 

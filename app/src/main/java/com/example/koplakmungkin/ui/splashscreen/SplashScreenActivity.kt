@@ -1,4 +1,4 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.ui.splashscreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.example.koplakmungkin.ui.locationpermission.LocationPermissionActivity
+import com.example.koplakmungkin.utils.SharedPreferenceManager
 import com.example.koplakmungkin.databinding.ActivitySplashScreenBinding
+import com.example.koplakmungkin.ui.onboarding.OnBoardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
