@@ -1,4 +1,4 @@
-package com.example.koplakmungkin.ui.mentor
+package com.example.koplakmungkin.ui.main.mentor
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

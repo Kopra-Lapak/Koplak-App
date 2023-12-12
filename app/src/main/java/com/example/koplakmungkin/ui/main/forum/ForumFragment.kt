@@ -1,4 +1,4 @@
-package com.example.koplakmungkin.ui.forum
+package com.example.koplakmungkin.ui.main.forum
 
 import android.os.Bundle
 import android.view.LayoutInflater

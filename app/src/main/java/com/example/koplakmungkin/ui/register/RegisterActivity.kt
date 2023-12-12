@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.koplakmungkin.databinding.ActivityRegisterBinding
+import com.example.koplakmungkin.ui.opening.OpeningActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -16,10 +17,18 @@ class RegisterActivity : AppCompatActivity() {
         binding.registerLayout.nextBtn.setOnClickListener{
             personalDataIntent()
         }
+        binding.registerLayout.backBtn.setOnClickListener {
+            backBtn()
+        }
     }
 
     private fun personalDataIntent() {
         val intent = Intent(this, PersonalDataActivity::class.java)
         startActivity(intent)
+    }
+    private fun backBtn(){
+        val intent = Intent (this, OpeningActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

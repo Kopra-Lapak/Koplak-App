@@ -1,4 +1,4 @@
-package com.example.koplakmungkin.ui.home
+package com.example.koplakmungkin.ui.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_kopra_sell"
-        android:name="com.example.koplakmungkin.ui.koprasell.JualKopraFragment"
+        android:name="com.example.koplakmungkin.ui.main.koprasell.JualKopraFragment"
         android:label="@string/title_kopra"
         tools:layout="@layout/fragment_jual_kopra" />
 
     <fragment
         android:id="@+id/navigation_forum"
-        android:name="com.example.koplakmungkin.ui.forum.ForumFragment"
+        android:name="com.example.koplakmungkin.ui.main.forum.ForumFragment"
         android:label="@string/title_forum"
         tools:layout="@layout/fragment_forum"/>
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.koplakmungkin.ui.home.HomeFragment"
+        android:name="com.example.koplakmungkin.ui.main.home.HomeFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_mentor"
-        android:name="com.example.koplakmungkin.ui.mentor.MentorFragment"
+        android:name="com.example.koplakmungkin.ui.main.mentor.MentorFragment"
         android:label="@string/title_mentor"
         tools:layout="@layout/fragment_mentor"/>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.koplakmungkin.ui.profile.ProfileFragment"
+        android:name="com.example.koplakmungkin.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
