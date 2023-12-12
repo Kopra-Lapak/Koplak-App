@@ -1,7 +1,8 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.utils
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.example.koplakmungkin.R
 
 class SharedPreferenceManager (context: Context) {
 

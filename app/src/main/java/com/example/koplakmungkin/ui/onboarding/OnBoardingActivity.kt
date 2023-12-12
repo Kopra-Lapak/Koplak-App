@@ -1,4 +1,4 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.ui.onboarding
 
 
 import android.content.Intent
@@ -6,7 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.koplakmungkin.ui.locationpermission.LocationPermissionActivity
+import com.example.koplakmungkin.R
+import com.example.koplakmungkin.utils.SharedPreferenceManager
 import com.example.koplakmungkin.databinding.ActivityOnBoardingBinding
+import com.example.koplakmungkin.utils.gone
+import com.example.koplakmungkin.utils.visible
 import com.google.android.material.tabs.TabLayoutMediator
 
 class OnBoardingActivity : AppCompatActivity() {

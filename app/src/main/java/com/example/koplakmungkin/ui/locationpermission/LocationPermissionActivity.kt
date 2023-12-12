@@ -1,4 +1,4 @@
-package com.example.koplakmungkin
+package com.example.koplakmungkin.ui.locationpermission
 
 import android.Manifest
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.koplakmungkin.ui.opening.OpeningActivity
+import com.example.koplakmungkin.R
 import com.example.koplakmungkin.databinding.ActivityLocationPermissionBinding
 
 

@@ -18,32 +18,38 @@
         android:theme="@style/Theme.KoplakMungkin"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.welcome.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".OpeningActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LocationPermissionActivity"
+            android:name=".ui.opening.OpeningActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".ui.locationpermission.LocationPermissionActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".ui.onboarding.OnBoardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.register.PersonalDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
+            android:label="@string/title_activity_main"
             android:exported="false" />
     </application>
 
