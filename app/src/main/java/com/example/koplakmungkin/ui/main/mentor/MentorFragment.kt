@@ -22,6 +22,5 @@ class MentorFragment : Fragment() {
     }
 
     companion object {
-
     }
 }
