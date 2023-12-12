@@ -61,6 +61,9 @@ class PersonalDataActivity : AppCompatActivity() {
         binding.personalDataLayout.cityDomicileEditText.setOnClickListener {
             showBottomSheetCityDialog()
         }
+        binding.personalDataLayout.dataBtn.setOnClickListener {
+
+        }
     }
 
     private fun showBottomSheetJobDialog() {

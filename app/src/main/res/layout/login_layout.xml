@@ -124,6 +124,8 @@
         android:drawableLeft="@drawable/ic_google"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
+        android:theme="@style/buttonstyle1"
+        android:textColor="@color/brown"
         android:text="@string/googleLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_kopra_sell"
-        android:icon="@drawable/ic_kopra"
+        android:icon="@drawable/ic_jualkopra"
         android:title="@string/title_kopra" />
 
     <item
