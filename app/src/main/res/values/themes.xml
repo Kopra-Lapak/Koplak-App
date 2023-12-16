@@ -17,6 +17,6 @@
     </style>
 
     <style name="buttonstyle1" parent="Theme.AppCompat.Light">
-        <item name="btnWhite">@color/white</item>
+        <item name="android:button">@color/white</item>
     </style>
 </resources>

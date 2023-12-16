@@ -30,7 +30,7 @@
     <string name="optionLogin">atau masuk dengan</string>
     <string name="googleLogin">Masuk dengan google</string>
     <string name="decsRegist">Belum punya akun?</string>
-    <string name="decsLogin">Sudah punya akun?</string>
+    <string name="decsLogin">Sudah punya akun? </string>
     <string name="registBtn">Daftar</string>
     <string name="loginBtn">Masuk di sini</string>
     <string name="titleRegist">Daftar jadi member Kopra Lapak</string>
@@ -74,4 +74,13 @@
     <string name="massa">/Kg</string>
     <string name="kota">Kota %s</string>
     <string name="contact">Contact : %d</string>
+    <string name="grade">Grade : %s</string>
+    <string name="camera">Camera</string>
+    <string name="description_hint">Deskripsi</string>
+    <string name="price_hint">Price</string>
+    <string name="contact_hint">Contact</string>
+    <string name="submit">Submit</string>
+    <string name="jual">Jual Kopra</string>
+    <string name="create_news">Buat Berita</string>
+
 </resources>

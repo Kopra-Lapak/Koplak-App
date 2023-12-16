@@ -1,28 +1,39 @@
 package com.example.koplakmungkin.ui.register
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koplakmungkin.BottomSheetAdapter
 import com.example.koplakmungkin.R
+import com.example.koplakmungkin.data.pref.UserData
 import com.example.koplakmungkin.databinding.ActivityPersonalDataBinding
+import com.example.koplakmungkin.ui.login.LoginActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDragHandleView
+import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 class PersonalDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPersonalDataBinding
     private var selectedDate: String? = null
+    private var userId: String? = null
+    private var email: String? = null
+    private var password: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonalDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userId = intent.getStringExtra("user_id")
+        email = intent.getStringExtra("user_email")
+        password = intent.getStringExtra("user_password")
 
         val birthEditText = binding.personalDataLayout.birthEditText
         val birthEditTextLayout = binding.personalDataLayout.birthEditTextLayout
@@ -61,9 +72,42 @@ class PersonalDataActivity : AppCompatActivity() {
         binding.personalDataLayout.cityDomicileEditText.setOnClickListener {
             showBottomSheetCityDialog()
         }
-        binding.personalDataLayout.dataBtn.setOnClickListener {
+        binding.personalDataLayout.dataBtn.setOnClickListener{
+            val userData = UserData(
+                id = userId,
+                email = email,
+                password = password,
+                username = binding.personalDataLayout.usernameEditText.text.toString(),
+                pekerjaan = binding.personalDataLayout.chooseJobEditText.text.toString(),
+                domisili = binding.personalDataLayout.cityDomicileEditText.text.toString(),
+                tanggalLahir = binding.personalDataLayout.birthEditText.text.toString(),
+                jenisKelamin = binding.personalDataLayout.genderEditText.text.toString(),
 
+            )
+
+            submitUserDataToFirebase(userData)
         }
+    }
+
+    private fun submitUserDataToFirebase(userData: UserData) {
+        val database = FirebaseDatabase.getInstance().reference
+        val userReference = database.child("users").child(userId.orEmpty())
+
+        userReference.setValue(userData)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Registrasi berhasil.", Toast.LENGTH_SHORT).show()
+                    navigateToLogin()
+                } else {
+                    Toast.makeText(this, "Registrasi gagal. Silakan coba lagi.", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this@PersonalDataActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun showBottomSheetJobDialog() {
@@ -76,8 +120,6 @@ class PersonalDataActivity : AppCompatActivity() {
         val adapter = BottomSheetAdapter { selectedJob ->
             binding.personalDataLayout.chooseJobEditText.setText(selectedJob)
             bottomSheetDialog.dismiss()
-            val endIconDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_keyboard_arrow_down_24)
-            binding.personalDataLayout.chooseJobEditTextLayout.endIconDrawable = endIconDrawable
         }
 
         recyclerView.adapter = adapter
@@ -86,8 +128,6 @@ class PersonalDataActivity : AppCompatActivity() {
         val jobList = listOf("Penjual Kopra", "Pembeli Kopra")
         adapter.submitList(jobList)
 
-        val endIconDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_keyboard_arrow_up_24)
-        binding.personalDataLayout.chooseJobEditTextLayout.endIconDrawable = endIconDrawable
 
         bottomSheetDialog.show()
     }
@@ -104,14 +144,12 @@ class PersonalDataActivity : AppCompatActivity() {
         val adapter = BottomSheetAdapter { selectedCity ->
             binding.personalDataLayout.cityDomicileEditText.setText(selectedCity)
             bottomSheetDialog.dismiss()
-            val endIconDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_keyboard_arrow_down_24)
-            binding.personalDataLayout.cityDomicileLayout.endIconDrawable = endIconDrawable
         }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val cityList = listOf("aa", "bb", "cc", "dd", "bc")
+        val cityList = listOf("Bontang", "Balikpapan", "Samarinda", "Sanggata", "Penajam")
         adapter.setCityList(cityList)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -142,8 +180,6 @@ class PersonalDataActivity : AppCompatActivity() {
         val adapter = BottomSheetAdapter { selectedJob ->
             binding.personalDataLayout.genderEditText.setText(selectedJob)
             bottomSheetDialog.dismiss()
-            val endIconDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_keyboard_arrow_down_24)
-            binding.personalDataLayout.chooseJobEditTextLayout.endIconDrawable = endIconDrawable
         }
 
         recyclerView.adapter = adapter
@@ -152,8 +188,6 @@ class PersonalDataActivity : AppCompatActivity() {
         val genderList = listOf("Laki - Laki", "Perempuan")
         adapter.submitList(genderList)
 
-        val endIconDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_keyboard_arrow_up_24)
-        binding.personalDataLayout.chooseJobEditTextLayout.endIconDrawable = endIconDrawable
 
         bottomSheetDialog.show()
     }
