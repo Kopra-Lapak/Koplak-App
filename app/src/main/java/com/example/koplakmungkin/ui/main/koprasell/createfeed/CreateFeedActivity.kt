@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.example.koplakmungkin.R
-import com.example.koplakmungkin.data.pref.FeedData
+import com.example.koplakmungkin.data.model.FeedData
 import com.example.koplakmungkin.databinding.ActivityCreateFeedBinding
 import com.example.koplakmungkin.ui.main.MainActivity
 import com.google.firebase.database.FirebaseDatabase

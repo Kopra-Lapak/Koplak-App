@@ -1,4 +1,4 @@
-package com.example.koplakmungkin.data.pref
+package com.example.koplakmungkin.data.model
 
 data class FeedData (
     val description: String? = null,

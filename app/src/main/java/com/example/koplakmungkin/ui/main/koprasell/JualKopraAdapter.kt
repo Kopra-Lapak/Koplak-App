@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.koplakmungkin.R
-import com.example.koplakmungkin.data.pref.FeedData
+import com.example.koplakmungkin.data.model.FeedData
 
 class JualKopraAdapter(private var feedList: List<FeedData>) : RecyclerView.Adapter<JualKopraAdapter.FeedViewHolder>(){
     class FeedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

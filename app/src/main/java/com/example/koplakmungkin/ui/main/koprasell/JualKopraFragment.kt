@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.koplakmungkin.data.pref.FeedData
+import com.example.koplakmungkin.data.model.FeedData
 import com.example.koplakmungkin.databinding.FragmentJualKopraBinding
 import com.example.koplakmungkin.ui.main.koprasell.createfeed.CreateFeedActivity
 import com.example.koplakmungkin.ui.main.koprasell.createnews.CreateNewsActivity

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koplakmungkin.BottomSheetAdapter
 import com.example.koplakmungkin.R
-import com.example.koplakmungkin.data.pref.UserData
+import com.example.koplakmungkin.data.model.UserData
 import com.example.koplakmungkin.databinding.ActivityPersonalDataBinding
 import com.example.koplakmungkin.ui.login.LoginActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -73,19 +73,19 @@ class PersonalDataActivity : AppCompatActivity() {
             showBottomSheetCityDialog()
         }
         binding.personalDataLayout.dataBtn.setOnClickListener{
-            val userData = UserData(
-                id = userId,
-                email = email,
-                password = password,
-                username = binding.personalDataLayout.usernameEditText.text.toString(),
-                pekerjaan = binding.personalDataLayout.chooseJobEditText.text.toString(),
-                domisili = binding.personalDataLayout.cityDomicileEditText.text.toString(),
-                tanggalLahir = binding.personalDataLayout.birthEditText.text.toString(),
-                jenisKelamin = binding.personalDataLayout.genderEditText.text.toString(),
-
-            )
-
-            submitUserDataToFirebase(userData)
+//            val userData = UserData(
+//                id = userId,
+//                email = email,
+//                password = password,
+//                username = binding.personalDataLayout.usernameEditText.text.toString(),
+//                pekerjaan = binding.personalDataLayout.chooseJobEditText.text.toString(),
+//                domisili = binding.personalDataLayout.cityDomicileEditText.text.toString(),
+//                tanggalLahir = binding.personalDataLayout.birthEditText.text.toString(),
+//                jenisKelamin = binding.personalDataLayout.genderEditText.text.toString(),
+//
+//            )
+//
+//            submitUserDataToFirebase(userData)
         }
     }
 
