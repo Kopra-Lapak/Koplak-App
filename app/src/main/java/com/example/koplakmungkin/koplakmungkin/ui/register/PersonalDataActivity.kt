@@ -57,7 +57,7 @@ class PersonalDataActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, year, monthOfYear, dayOfMonth ->
-                val formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear + 1, year)
+                val formattedDate = String.format("%04d/%02d/%02d", year, monthOfYear + 1, dayOfMonth)
                 birthEditText.setText(formattedDate)
                 selectedDate = formattedDate
                 birthEditTextLayout.hint = null
@@ -81,6 +81,11 @@ class PersonalDataActivity : AppCompatActivity() {
         }
 
         submitPersonalData()
+
+        viewModel.sessionResult.observe(this) { sessionData ->
+            // Handle the session data as needed
+            Log.d("PersonalDataActivity", "Session data: $sessionData")
+        }
 
         viewModel.profileResult.observe(this) {result ->
             when(result){
@@ -120,13 +125,15 @@ class PersonalDataActivity : AppCompatActivity() {
     private fun submitPersonalData(){
         binding.personalDataLayout.dataBtn.setOnClickListener {
 //            val userId = intent.getStringExtra("userId")?:""
-            val imageProfile = "binding.personalDataLayout.chooseJobEditText.toString()"
+            val imageProfile = binding.personalDataLayout.chooseJobEditText.toString()
             val fullname = binding.personalDataLayout.usernameEditText.text.toString()
             val address = binding.personalDataLayout.cityDomicileEditText.text.toString()
             val birth = binding.personalDataLayout.birthEditText.text.toString()
             val gender = binding.personalDataLayout.genderEditText.text.toString()
 
 //           )
+            viewModel.getSession()
+
             viewModel.regisProfile(imageProfile, fullname, address, birth, gender )
         }
     }
@@ -191,7 +198,7 @@ class PersonalDataActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val genderList = listOf("Male", "Female")
+        val genderList = listOf("male", "female")
         adapter.submitList(genderList)
 
 
