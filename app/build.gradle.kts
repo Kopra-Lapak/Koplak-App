@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -15,8 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        buildConfigField("String", "API_BASE_URL", "\"https://api-model-copra-ruda54anzq-uc.a.run.app/\"")
-        buildConfigField("String", "API_CC", "\"https://koplak-api-cc-ruda54anzq-uc.a.run.app/\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://koplak-api-ml-ralkod7uda-uc.a.run.app\"")
+        buildConfigField("String", "API_CC", "\"https://koplak-api-cc-ralkod7uda-uc.a.run.app\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -71,4 +72,20 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    //library paging 3
+    implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+
+    // Library Room
+    implementation("androidx.room:room-paging:2.4.0-rc01")
+    implementation("androidx.room:room-ktx:2.6.0")
+
+    kapt("androidx.room:room-compiler:2.6.0")
+
+    //Testing Paging 3
+    testImplementation("androidx.arch.core:core-testing:2.1.0") // InstantTaskExecutorRule
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") //TestDispatcher
+    testImplementation("org.mockito:mockito-core:3.12.4")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
+
 }

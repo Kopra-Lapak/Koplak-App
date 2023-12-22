@@ -9,6 +9,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -29,8 +30,10 @@ interface ApiService {
         @Field("password") password: String,
     ): RegisterResponse
 
+    @FormUrlEncoded
     @POST("profile")
     suspend fun profile(
+        @Header("Authorization") token: String,
         @Field("image_profile") imageProfile: String,
         @Field("fullname") fullName: String,
         @Field("address") address: String,

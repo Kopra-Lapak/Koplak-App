@@ -55,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
                     is Result.Success -> {
                         showLoading(false)
                         val response: RegisterResponse = result.data
+                        val userId =  response.data.user_id
                         AlertDialog.Builder(this).apply {
                             setTitle("Mantep!")
                             setMessage(response.status)
@@ -62,7 +63,9 @@ class RegisterActivity : AppCompatActivity() {
                             create()
                             show()
                         }
-                        val intent = Intent(this, PersonalDataActivity::class.java)
+//                        val intent = Intent(this, PersonalDataActivity::class.java)
+//                        intent.putExtra("userId", userId)
+                        val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     }
                     is Result.Error -> {

@@ -3,24 +3,34 @@ package com.example.koplakmungkin.ui.register
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koplakmungkin.BottomSheetAdapter
 import com.example.koplakmungkin.R
+import com.example.koplakmungkin.data.Result
+import com.example.koplakmungkin.data.di.Injection
+import com.example.koplakmungkin.data.model.ProfileData
 import com.example.koplakmungkin.data.model.UserData
+import com.example.koplakmungkin.data.response.ProfileResponse
 import com.example.koplakmungkin.databinding.ActivityPersonalDataBinding
+import com.example.koplakmungkin.ui.ViewModelFactory
 import com.example.koplakmungkin.ui.login.LoginActivity
+import com.example.koplakmungkin.ui.main.profile.ProfileFragment
+import com.example.koplakmungkin.ui.opening.OpeningActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDragHandleView
-import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 class PersonalDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPersonalDataBinding
+    private lateinit var viewModel: PersonalDataViewModel
     private var selectedDate: String? = null
     private var userId: String? = null
     private var email: String? = null
@@ -30,10 +40,11 @@ class PersonalDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonalDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this, ViewModelFactory(Injection.provideRepository(this))).get(PersonalDataViewModel::class.java)
 
-        userId = intent.getStringExtra("user_id")
-        email = intent.getStringExtra("user_email")
-        password = intent.getStringExtra("user_password")
+        userId = intent.getStringExtra("userId_regis")
+        email = intent.getStringExtra("email_regis")
+        password = intent.getStringExtra("password_regis")
 
         val birthEditText = binding.personalDataLayout.birthEditText
         val birthEditTextLayout = binding.personalDataLayout.birthEditTextLayout
@@ -61,10 +72,6 @@ class PersonalDataActivity : AppCompatActivity() {
         }
 
 
-        binding.personalDataLayout.chooseJobEditText.setOnClickListener {
-            showBottomSheetJobDialog()
-        }
-
         binding.personalDataLayout.genderEditText.setOnClickListener {
             showBottomSheetGenderDialog()
         }
@@ -72,64 +79,63 @@ class PersonalDataActivity : AppCompatActivity() {
         binding.personalDataLayout.cityDomicileEditText.setOnClickListener {
             showBottomSheetCityDialog()
         }
-        binding.personalDataLayout.dataBtn.setOnClickListener{
-//            val userData = UserData(
-//                id = userId,
-//                email = email,
-//                password = password,
-//                username = binding.personalDataLayout.usernameEditText.text.toString(),
-//                pekerjaan = binding.personalDataLayout.chooseJobEditText.text.toString(),
-//                domisili = binding.personalDataLayout.cityDomicileEditText.text.toString(),
-//                tanggalLahir = binding.personalDataLayout.birthEditText.text.toString(),
-//                jenisKelamin = binding.personalDataLayout.genderEditText.text.toString(),
-//
-//            )
-//
-//            submitUserDataToFirebase(userData)
-        }
-    }
 
-    private fun submitUserDataToFirebase(userData: UserData) {
-        val database = FirebaseDatabase.getInstance().reference
-        val userReference = database.child("users").child(userId.orEmpty())
+        submitPersonalData()
 
-        userReference.setValue(userData)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Registrasi berhasil.", Toast.LENGTH_SHORT).show()
-                    navigateToLogin()
-                } else {
-                    Toast.makeText(this, "Registrasi gagal. Silakan coba lagi.", Toast.LENGTH_SHORT).show()
+        viewModel.profileResult.observe(this) {result ->
+            when(result){
+                is Result.Loading -> {
+                    showLoading(true)
+                    Log.d("personalDataActivity", "submit profile loading")
+                }
+                is Result.Success ->{
+//                    showLoading(false)
+//                    val response: ProfileResponse = result.data
+//                    AlertDialog.Builder(this).apply {
+//                        setTitle("Mantep Profile!")
+//                        setMessage(response.status)
+//                        setPositiveButton("Lanjut"){ _, _ ->}
+//                        create()
+//                        show()
+                        Log.d("tag", "submit profile success")
+//                    }
+//                    navigateToLogin()
+                }
+                is Result.Error ->{
+//                    showLoading(false)
+//                    val errorMessage: String = result.error
+//                    AlertDialog.Builder(this).apply {
+//                        setTitle("Oops")
+//                        setMessage(errorMessage)
+//                        setPositiveButton("OKE") { _, _ -> }
+//                        create()
+//                        show()
+                        Log.d("tag", "submit profile error")
+//                    }
                 }
             }
+        }
     }
+
+    private fun submitPersonalData(){
+        binding.personalDataLayout.dataBtn.setOnClickListener {
+//            val userId = intent.getStringExtra("userId")?:""
+            val imageProfile = binding.personalDataLayout.chooseJobEditText.toString()
+            val fullname = binding.personalDataLayout.usernameEditText.text.toString()
+            val address = binding.personalDataLayout.cityDomicileEditText.text.toString()
+            val birth = binding.personalDataLayout.birthEditText.text.toString()
+            val gender = binding.personalDataLayout.genderEditText.text.toString()
+
+//           )
+            viewModel.regisProfile(imageProfile, fullname, address, birth, gender )
+        }
+    }
+
 
     private fun navigateToLogin() {
-        val intent = Intent(this@PersonalDataActivity, LoginActivity::class.java)
+        Log.d("tag", "submit profile navigateToLogin")
+        val intent = Intent(this@PersonalDataActivity, ProfileFragment::class.java)
         startActivity(intent)
-        finish()
-    }
-
-    private fun showBottomSheetJobDialog() {
-        val bottomSheetDialog = BottomSheetDialog(this)
-        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_choice_job, null)
-        bottomSheetDialog.setContentView(bottomSheetView)
-
-        val recyclerView = bottomSheetView.findViewById<RecyclerView>(R.id.rvItem)
-
-        val adapter = BottomSheetAdapter { selectedJob ->
-            binding.personalDataLayout.chooseJobEditText.setText(selectedJob)
-            bottomSheetDialog.dismiss()
-        }
-
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val jobList = listOf("Penjual Kopra", "Pembeli Kopra")
-        adapter.submitList(jobList)
-
-
-        bottomSheetDialog.show()
     }
 
     private fun showBottomSheetCityDialog() {
@@ -185,10 +191,19 @@ class PersonalDataActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val genderList = listOf("Laki - Laki", "Perempuan")
+        val genderList = listOf("Male", "Female")
         adapter.submitList(genderList)
 
 
         bottomSheetDialog.show()
+    }
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                personalDataLayout.progressBar.visibility = View.VISIBLE
+            } else {
+                personalDataLayout.progressBar.visibility = View.GONE
+            }
+        }
     }
 }

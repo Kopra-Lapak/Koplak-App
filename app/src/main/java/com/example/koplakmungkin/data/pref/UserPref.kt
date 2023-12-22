@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.koplakmungkin.data.model.UserData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
@@ -17,8 +18,8 @@ class UserPref private constructor(private val dataStore: DataStore<Preferences>
 
     suspend fun saveSession(user: UserData) {
         dataStore.edit { preferences ->
-            preferences[ID_KEY] = user.id ?: ""
-            preferences[USERNAME_KEY] = user.username ?: ""
+//            preferences[USER_ID_KEY] = user.user_id ?: ""
+            preferences[USERNAME_KEY] = user.email ?: ""
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
         }
@@ -27,12 +28,16 @@ class UserPref private constructor(private val dataStore: DataStore<Preferences>
     fun getSession(): Flow<UserData> {
         return dataStore.data.map { preferences ->
             UserData(
-                preferences[ID_KEY] ?: "",
+//                preferences[USER_ID_KEY] ?: "",
                 preferences[USERNAME_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }
+    }
+    suspend fun getToken(): String {
+        val userModel = getSession().first()
+        return "Bearer ${userModel.token}"
     }
 
     suspend fun logout() {
@@ -45,7 +50,7 @@ class UserPref private constructor(private val dataStore: DataStore<Preferences>
         @Volatile
         private var INSTANCE: UserPref? = null
 
-        private val ID_KEY = stringPreferencesKey("id")
+//        private val USER_ID_KEY = stringPreferencesKey("user_id")
         private val USERNAME_KEY = stringPreferencesKey("username")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")

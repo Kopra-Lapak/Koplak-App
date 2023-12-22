@@ -15,11 +15,11 @@ class LoginViewModel(private val koplakRepository: KoplakRepository) : ViewModel
     private val _loginResult = MutableLiveData<Result<LoginResponse>>()
     val loginResult: LiveData<Result<LoginResponse>> get() = _loginResult
 
-    fun saveSession(user: UserData) {
-        viewModelScope.launch {
-            koplakRepository.saveSession(user)
-        }
-    }
+//    fun saveSession(user: UserData) {
+//        viewModelScope.launch {
+//            koplakRepository.saveSession(user)
+//        }
+//    }
 
     fun login(email: String, password: String) {
         _loginResult.value = Result.Loading

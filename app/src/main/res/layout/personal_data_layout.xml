@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:contentDescription="@string/back"
         android:src="@drawable/backbtn"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
@@ -89,6 +91,7 @@
             android:hint="@string/chooseJob_hint"
             android:inputType="none"
             android:focusable="false"
+
             android:clickable="true"
             android:longClickable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -212,5 +215,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/genderLayout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

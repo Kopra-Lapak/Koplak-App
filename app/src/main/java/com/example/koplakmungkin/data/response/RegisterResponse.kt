@@ -18,6 +18,9 @@ data class RegisterResponse (
 
 data class DataRegister(
 
+    @field:SerializedName("user_id")
+    val user_id: String,
+
     @field:SerializedName("email")
     val email: String,
 

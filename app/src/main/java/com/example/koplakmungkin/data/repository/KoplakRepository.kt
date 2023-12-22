@@ -1,10 +1,12 @@
 package com.example.koplakmungkin.data.repository
 
+import android.util.Log
 import com.example.koplakmungkin.data.Result
 import com.example.koplakmungkin.data.model.UserData
 import com.example.koplakmungkin.data.pref.UserPref
 import com.example.koplakmungkin.data.response.ErrorResponse
 import com.example.koplakmungkin.data.response.LoginResponse
+import com.example.koplakmungkin.data.response.ProfileResponse
 import com.example.koplakmungkin.data.response.RegisterResponse
 import com.example.koplakmungkin.data.retrofit.ApiService
 import com.google.gson.Gson
@@ -52,13 +54,17 @@ class KoplakRepository private constructor(
             }
         }
     }
-    suspend fun login(email: String, password: String): Result<LoginResponse> {
+
+    suspend fun regisProfile(imageProfile: String, fullname: String, address: String, birth: String, gender: String): Result<ProfileResponse> {
+
         return try {
-            val response = apiService.login(email, password)
+            val response = apiService.profile(getToken(), imageProfile, fullname, address, birth, gender)
 
             if (response.status == "BAD_REQUEST") {
+                Log.d("tag", "regisprofile bad")
                 Result.Error(response.status)
             } else {
+                Log.d("tag", "regisprofile success")
                 Result.Success(response)
             }
         } catch (e: HttpException) {
@@ -75,6 +81,34 @@ class KoplakRepository private constructor(
             }
         }
     }
+
+    suspend fun login(email: String, password: String): Result<LoginResponse> {
+        return try {
+            val response = apiService.login(email, password)
+
+            if (response.status == "BAD_REQUEST") {
+                Result.Error(response.status)
+            } else {
+                val userData = UserData(email= email, token = response.data.accessToken, isLogin = true)
+                saveSession(userData)
+                Result.Success(response)
+            }
+        } catch (e: HttpException) {
+            return if (e.response()?.errorBody() != null) {
+                try {
+                    val jsonInString = e.response()?.errorBody()?.string()
+                    val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                    Result.Error(errorBody.message ?: "Unknown error")
+                } catch (jsonException: JsonSyntaxException) {
+                    Result.Error("JSON parsing error")
+                }
+            } else {
+                Result.Error("Unknown error")
+            }
+        }
+    }
+
+    private suspend fun getToken():String = userPref.getToken()
 
     companion object {
         private var instance: KoplakRepository? = null
